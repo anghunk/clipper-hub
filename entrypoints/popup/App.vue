@@ -139,8 +139,8 @@ import { browser } from "wxt/browser";
 const browserAPI = browser;
 
 // 从环境变量获取默认值
-const envBotToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || '';
-const envChannelId = import.meta.env.VITE_TELEGRAM_CHANNEL_ID || '';
+const envBotToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || "";
+const envChannelId = import.meta.env.VITE_TELEGRAM_CHANNEL_ID || "";
 
 // 视图状态
 const currentView = ref<"main" | "settings">("main");
@@ -169,10 +169,10 @@ function toggleView() {
 }
 
 async function restoreSettings() {
-  const items = await browserAPI.storage.sync.get({
+  const items = (await browserAPI.storage.sync.get({
     telegramBotToken: envBotToken,
     telegramChannelId: envChannelId,
-  }) as { telegramBotToken: string; telegramChannelId: string };
+  })) as { telegramBotToken: string; telegramChannelId: string };
   botToken.value = items.telegramBotToken;
   channelId.value = items.telegramChannelId;
   isConfigured.value = !!(botToken.value && channelId.value);
@@ -192,10 +192,10 @@ async function sendQuickMessage() {
   }
 
   try {
-    const response = await browserAPI.runtime.sendMessage({
+    const response = (await browserAPI.runtime.sendMessage({
       action: "sendToTelegram",
       text: quickMessage.value,
-    }) as { success: boolean };
+    })) as { success: boolean };
     if (response && response.success) {
       showStatus("✅ 发送成功", "success");
       quickMessage.value = "";
@@ -219,10 +219,10 @@ async function sendCurrentPage() {
     if (currentTab) {
       const message = `${currentTab.title}\n\n${currentTab.url}`;
 
-      const response = await browserAPI.runtime.sendMessage({
+      const response = (await browserAPI.runtime.sendMessage({
         action: "sendToTelegram",
         text: message,
-      }) as { success: boolean };
+      })) as { success: boolean };
       if (response && response.success) {
         showStatus("✅ 页面已收藏", "success");
         setTimeout(() => {

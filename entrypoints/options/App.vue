@@ -14,7 +14,11 @@
         type="password"
         id="botToken"
         v-model="botToken"
-        :placeholder="envBotToken ? `默认: ${envBotToken.substring(0, 15)}...` : '例如: 123456789:AaBbCcDd...'"
+        :placeholder="
+          envBotToken
+            ? `默认: ${envBotToken.substring(0, 15)}...`
+            : '例如: 123456789:AaBbCcDd...'
+        "
       />
       <div class="help-text">请在 @BotFather 申请机器人的 Token</div>
     </div>
@@ -25,7 +29,9 @@
         type="text"
         id="channelId"
         v-model="channelId"
-        :placeholder="envChannelId ? `默认: ${envChannelId}` : '例如: @mychannel 或 -100123456789'"
+        :placeholder="
+          envChannelId ? `默认: ${envChannelId}` : '例如: @mychannel 或 -100123456789'
+        "
       />
       <div class="help-text">记得将机器人添加为频道管理员</div>
     </div>
@@ -43,8 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { browser } from 'wxt/browser';
+import { ref, onMounted } from "vue";
+import { browser } from "wxt/browser";
 
 const botToken = ref("");
 const channelId = ref("");
@@ -54,19 +60,19 @@ const statusMessage = ref("");
 const statusType = ref("info");
 
 // 从环境变量获取默认值
-const envBotToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || '';
-const envChannelId = import.meta.env.VITE_TELEGRAM_CHANNEL_ID || '';
+const envBotToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || "";
+const envChannelId = import.meta.env.VITE_TELEGRAM_CHANNEL_ID || "";
 
 onMounted(() => {
   restoreOptions();
 });
 
 async function restoreOptions() {
-  const items = await browser.storage.sync.get({
+  const items = (await browser.storage.sync.get({
     telegramBotToken: envBotToken,
     telegramChannelId: envChannelId,
-  }) as { telegramBotToken: string; telegramChannelId: string };
-  
+  })) as { telegramBotToken: string; telegramChannelId: string };
+
   botToken.value = items.telegramBotToken;
   channelId.value = items.telegramChannelId;
   updateConnectionStatus();
@@ -120,7 +126,7 @@ async function saveOptions() {
     telegramBotToken: botToken.value,
     telegramChannelId: channelId.value,
   });
-  
+
   showStatus("✅ 设置已保存!", "success");
   updateConnectionStatus();
   setTimeout(() => {
@@ -130,7 +136,9 @@ async function saveOptions() {
 
 async function testNotification() {
   try {
-    const response = await browser.runtime.sendMessage({ action: "testNotification" }) as { success: boolean };
+    const response = (await browser.runtime.sendMessage({
+      action: "testNotification",
+    })) as { success: boolean };
     if (response && response.success) {
       showStatus("✅ 通知已发送", "success");
     } else {
