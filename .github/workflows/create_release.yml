@@ -45,18 +45,14 @@ jobs:
       if: env.create_release == 'true'
       run: |
         CURRENT_DATE=$(TZ='Asia/Shanghai' date +'%Y-%m-%d  %H:%M')
-        sed -i "s/\$PACKAGE_VERSION/$PACKAGE_VERSION/g" CHANGELOG.md
-        sed -i "s/\$CURRENT_DATE/$CURRENT_DATE/g" CHANGELOG.md
         gh release create "$PACKAGE_VERSION" \
         -t "$PACKAGE_VERSION" \
-        -n "$(cat CHANGELOG.md)
+        -n "## Release $PACKAGE_VERSION
 
         ---
 
         使用方法:  
-        - **Chrome / Edge / Arc / Brave**：[Chrome Web Store](http://github.com/ezyshu/wxt-plugin-template)
-        - **国内用户**：[Crx 商店](http://github.com/ezyshu/wxt-plugin-template)
-        - **Firefox**：[Firefox Addons](http://github.com/ezyshu/wxt-plugin-template)
+        - **Chrome / Edge / Arc / Brave**：[Chrome Web Store](http://github.com/anghunk/telegram-clipper)
         
         发布于：$CURRENT_DATE"
       env:
