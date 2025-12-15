@@ -21,13 +21,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build and package extensions
-      if: env.create_release == 'true'
-      run: |
-        npm run build
-        npm run zip
-        npm run zip:firefox
-
     - name: Get package.json version
       id: get_version
       run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
@@ -47,6 +40,13 @@ jobs:
           echo "Version matches"
           echo "create_release=false" >> $GITHUB_ENV
         fi
+
+    - name: Build and package extensions
+      if: env.create_release == 'true'
+      run: |
+        npm run build
+        npm run zip
+        npm run zip:firefox
 
     - name: Create new release
       if: env.create_release == 'true'
