@@ -162,7 +162,7 @@ A: 使用本地浏览器的 `browser.storage.sync` API 存储，数据会在同�
 
 ## 🙏 致谢
 
-本项目基于 [爆肝 2 小时！一键 TG 频道助手](https://linux.do/t/topic/1302858) 进行二次开发和重构。
+本项目参考 [[爆肝 2 小时！一键 TG 频道助手](https://linux.do/t/topic/1302858)](https://linux.do/t/topic/1302858) 进行开发。
 
 ---
 
