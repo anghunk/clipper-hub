@@ -4,15 +4,6 @@ import pkg from './package.json';
 // See https://wxt.dev/api/config.html
 export default defineConfig({
 	vite: () => ({
-		css: {
-			preprocessorOptions: {
-				less: {
-					modifyVars: {
-						'arcoblue-6': '#2C3E50',
-					},
-				},
-			},
-		},
 		define: {
 			// 将环境变量注入到浏览器扩展中
 			'import.meta.env.VITE_TELEGRAM_BOT_TOKEN': JSON.stringify(process.env.VITE_TELEGRAM_BOT_TOKEN || ''),

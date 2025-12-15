@@ -2,7 +2,7 @@
   "name": "telegram-clipper",
   "description": "manifest.json description",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -17,20 +17,13 @@
     "rf": "rimraf node_modules"
   },
   "dependencies": {
-    "@arco-themes/vue-indigo-sky": "^0.0.1",
-    "element-plus": "^2.9.1",
-    "html2canvas": "^1.4.1",
-    "jquery": "^3.7.1",
-    "marked": "^14.1.1",
-    "pangu": "^4.0.7",
     "publish": "^0.6.0",
+    "rimraf": "^6.1.2",
     "vue": "^3.5.12",
-    "webdav": "^5.7.1",
     "webext-dynamic-content-scripts": "^10.0.3",
     "webext-permission-toggle": "^5.0.1"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.56.3",
     "@types/chrome": "^0.0.280",
     "@vitejs/plugin-vue": "^5.1.2",
     "@wxt-dev/module-vue": "^1.0.1",

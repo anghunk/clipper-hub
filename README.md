@@ -1,6 +1,8 @@
+![](./public/icon/128.png)
+
 ## Telegram Clipper - TG 剪藏
 
-基于 [爆肝 2 小时！一键 TG 频道助手 - Chrome 插件发布（碎片信息化 - 收藏整理发布到 - Telegram）](https://linux.do/t/topic/1302858) 该贴的基础进行二次开发。新增自定义内容发送
+基于 [爆肝 2 小时！一键 TG 频道助手 - Chrome 插件发布（碎片信息化 - 收藏整理发布到 - Telegram）](https://linux.do/t/topic/1302858) 代码的基础进行二次开发。新增自定义内容发送
 
 > 将网页精彩内容一键收藏至 Telegram 频道,支持文字编辑、格式保留和网页快存。
 

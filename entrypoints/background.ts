@@ -2,7 +2,7 @@ import { defineBackground } from 'wxt/sandbox';
 import { browser } from 'wxt/browser';
 
 export default defineBackground(() => {
-  console.log('一键TG频道助手 - 后台服务启动', { id: browser.runtime.id });
+  console.log('Telegram Clipper - TG 剪藏 - 后台服务启动', { id: browser.runtime.id });
   
   // 从环境变量获取默认配置
   const envBotToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || '';
@@ -13,7 +13,7 @@ export default defineBackground(() => {
     // Parent menu
     browser.contextMenus.create({
       id: "telegramParent",
-      title: "一键TG频道助手",
+      title: "Telegram Clipper - TG 剪藏",
       contexts: ["all"]
     });
 
@@ -187,7 +187,21 @@ function bookmarkPage(tab: any) {
   const title = tab.title || "无标题";
   const url = tab.url || "";
   const message = `${title}\n\n${url}`;
-  sendToTelegram(message);
+  
+  // 打开编辑页面预览内容
+  browserAPI.storage.local.set({
+    'edit_content': message,
+    'edit_content_html': '',
+    'edit_url': url,
+    'edit_title': title
+  }, () => {
+    browserAPI.windows.create({
+      url: 'edit.html',
+      type: 'popup',
+      width: 650,
+      height: 600
+    });
+  });
 }
 
 function openEditPage(initialSelection: string, pageUrl: string) {

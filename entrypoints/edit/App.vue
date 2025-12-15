@@ -1,5 +1,10 @@
 <template>
   <div class="edit-container">
+    <!-- 顶部标题栏 -->
+    <div class="header">
+      <h1>编辑剪藏内容</h1>
+    </div>
+
     <div class="content">
       <div class="form-group">
         <label for="titleInput">自定义标题</label>
@@ -14,23 +19,7 @@
       </div>
 
       <div class="form-group content-group">
-        <div class="label-row">
-          <label>内容编辑</label>
-          <label
-            class="source-toggle"
-            :class="{ active: includeSource }"
-            @click="toggleSource"
-          >
-            <input type="checkbox" v-model="includeSource" />
-            <svg class="toggle-icon" viewBox="0 0 24 24">
-              <path
-                d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-                fill="currentColor"
-              />
-            </svg>
-            <span class="toggle-text">来源</span>
-          </label>
-        </div>
+        <label>内容编辑</label>
         <div
           id="contentInput"
           class="preview-box"
@@ -43,7 +32,12 @@
 
     <div class="button-group">
       <button @click="handleCancel" class="btn btn-secondary">取消</button>
-      <button @click="handleSave" class="btn btn-primary">保存收藏</button>
+      <button @click="handleSave" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+        </svg>
+        保存并发送
+      </button>
     </div>
   </div>
 </template>
@@ -56,7 +50,7 @@ const browserAPI = browser;
 
 const titleInput = ref("");
 const contentHTML = ref("");
-const includeSource = ref(true);
+const includeSource = true; // 默认始终包含来源
 const editData = ref<{
   content: string;
   contentHTML: string;
@@ -66,7 +60,6 @@ const editData = ref<{
 
 onMounted(async () => {
   await loadEditData();
-  await loadUserSettings();
   // 自动聚焦到标题输入框
   setTimeout(() => {
     document.getElementById("titleInput")?.focus();
@@ -83,26 +76,7 @@ onUnmounted(() => {
   ]);
 });
 
-async function loadUserSettings() {
-  try {
-    const result = await browserAPI.storage.sync.get(["includeSource"]);
-    includeSource.value =
-      result.includeSource !== undefined ? (result.includeSource as boolean) : true;
-  } catch (error) {
-    console.error("加载设置失败:", error);
-  }
-}
-
-function saveUserSettings() {
-  browserAPI.storage.sync.set({
-    includeSource: includeSource.value,
-  });
-}
-
-function toggleSource() {
-  includeSource.value = !includeSource.value;
-  saveUserSettings();
-}
+// 移除了设置加载和切换功能，始终包含来源
 
 async function loadEditData() {
   try {
@@ -166,7 +140,7 @@ function updateContentPreview() {
     }
 
     // 添加来源信息
-    if (url) {
+    if (includeSource && url) {
       htmlContent += `<div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #e5e5ea;"><span style="color: #666; font-size: 13px;">来源: <a href="${url}" target="_blank" style="color: #007aff; text-decoration: none;">${url}</a></span></div>`;
     }
 
@@ -217,8 +191,8 @@ async function handleSave() {
     message = editedContent;
   }
 
-  // 如果勾选了来源开关，添加来源链接
-  if (includeSource.value && editData.value.url) {
+  // 添加来源链接
+  if (includeSource && editData.value.url) {
     message += `\n\n来源: ${editData.value.url}`;
   }
 
@@ -312,13 +286,31 @@ function htmlToTextWithBreaks(html: string): string {
   height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background: #ffffff;
-  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background: #f4f4f5;
+  color: #000000;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* 顶部标题栏 - Telegram 蓝色 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #3390ec;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.header h1 {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.3px;
 }
 
 .content {
@@ -327,7 +319,7 @@ function htmlToTextWithBreaks(html: string): string {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: #f4f4f5;
   overflow: hidden;
   min-height: 0;
 }
@@ -346,100 +338,47 @@ function htmlToTextWithBreaks(html: string): string {
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #1d1d1f;
-  letter-spacing: -0.01em;
-}
-
-.label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.label-row > label:first-child {
-  margin-bottom: 0;
-}
-
-.source-toggle {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  padding: 5px 12px;
-  border-radius: 6px;
-  background: #f2f2f7;
-  font-size: 13px;
+  color: #707579;
   font-weight: 500;
-  color: #999;
-  transition: all 0.2s ease;
-  user-select: none;
-  border: 1px solid #e5e5ea;
-}
-
-.source-toggle:hover {
-  background: #e5e5ea;
-}
-
-.source-toggle input {
-  display: none;
-}
-
-.source-toggle.active {
-  background: #e3f2fd;
-  color: #007aff;
-  border-color: #007aff;
-}
-
-.source-toggle .toggle-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  transform: translateY(2px);
-}
-
-.source-toggle .toggle-text {
   font-size: 13px;
-  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #d2d2d7;
+  padding: 12px;
+  border: 1px solid #e4e4e5;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: inherit;
   background: #ffffff;
+  color: #000000;
   transition: all 0.2s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #007aff;
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  border-color: #3390ec;
 }
 
 .form-group input::placeholder {
-  color: #9ca3af;
+  color: #a2acb4;
 }
 
 .preview-box {
   flex: 1;
   width: 100%;
   background: #ffffff;
-  border: 1px solid #d2d2d7;
-  border-radius: 8px;
+  border: 1px solid #e4e4e5;
+  border-radius: 12px;
   padding: 16px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: inherit;
-  color: #1d1d1f;
+  color: #000000;
   overflow-y: scroll !important;
   overflow-x: hidden !important;
-  line-height: 1.5;
+  line-height: 1.6;
   transition: all 0.2s ease;
   resize: none;
   box-sizing: border-box;
@@ -447,7 +386,8 @@ function htmlToTextWithBreaks(html: string): string {
   word-wrap: break-word;
   white-space: normal;
   scrollbar-width: thin;
-  scrollbar-color: #007aff #f0f0f0;
+  scrollbar-color: #c7c7cc #f2f2f7;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .preview-box::-webkit-scrollbar {
@@ -489,22 +429,20 @@ function htmlToTextWithBreaks(html: string): string {
 
 .preview-box:empty:before {
   content: "正在加载内容...";
-  color: #9ca3af;
+  color: #a2acb4;
   font-style: italic;
 }
 
 .preview-box:focus {
   outline: none;
-  border-color: #007aff;
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  border-color: #3390ec;
 }
 
 .button-group {
   flex-shrink: 0;
   flex-grow: 0;
-  padding: 8px 20px 20px 20px;
-  background: #ffffff;
-  border-top: 1px solid #f2f2f7;
+  padding: 12px 20px 20px 20px;
+  background: #f4f4f5;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -516,8 +454,8 @@ function htmlToTextWithBreaks(html: string): string {
   height: 44px;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -525,25 +463,29 @@ function htmlToTextWithBreaks(html: string): string {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  letter-spacing: -0.01em;
 }
 
 .btn-primary {
-  background: #007aff;
+  background: #3390ec;
   color: white;
 }
 
 .btn-primary:hover {
-  background: #0056cc;
+  background: #2b7cd3;
 }
 
 .btn-secondary {
-  background: #f2f2f7;
-  color: #1d1d1f;
-  border: 1px solid #d2d2d7;
+  background: #f4f4f5;
+  color: #3390ec;
+  border: 1px solid #e4e4e5;
 }
 
 .btn-secondary:hover {
-  background: #e5e5ea;
+  background: #e8e8e9;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

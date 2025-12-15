@@ -2,7 +2,7 @@
   <div class="popup-container">
     <!-- 顶部标题栏 -->
     <div class="header">
-      <h1>一键TG频道助手</h1>
+      <h1>Telegram Clipper - TG 剪藏</h1>
       <button
         @click="toggleView"
         class="settings-btn"
@@ -123,7 +123,7 @@
       <button @click="testConnection" :disabled="isLoading" class="btn-secondary">
         {{ isLoading ? "测试中..." : "测试连接" }}
       </button>
-      <button @click="saveSettings" class="btn-primary">💾 保存设置</button>
+      <button @click="saveSettings" class="btn-primary">保存设置</button>
 
       <div v-if="statusMessage" :class="['status', statusType]">
         {{ statusMessage }}
