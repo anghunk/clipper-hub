@@ -28,3 +28,4 @@ web-ext.config.ts
 package-lock.json
 .output
 .env.development
+.env.submit
