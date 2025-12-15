@@ -4,6 +4,8 @@
 
 > 将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord 等多个平台，让你的灵感和收藏无处不在。
 
+<img width="2022" height="1378" alt="frame_generic_dark" src="https://github.com/user-attachments/assets/019a6651-d199-49c0-8459-fffbc4097777" />
+
 ## ✨ 功能特性
 
 ### 🎯 核心功能
