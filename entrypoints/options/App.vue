@@ -5,7 +5,7 @@
       <div class="sidebar-header">
         <h1>Clipper Hub - 设置</h1>
       </div>
-      
+
       <div class="sidebar-section">
         <h3>平台管理</h3>
         <div class="platform-list">
@@ -19,8 +19,8 @@
               <span class="platform-name">{{ platform.meta.name }}</span>
             </div>
             <div class="platform-status">
-              <span 
-                v-if="platformConfigs[platform.meta.id].enabled" 
+              <span
+                v-if="platformConfigs[platform.meta.id].enabled"
                 class="status-badge enabled"
                 title="已启用"
               >
@@ -38,14 +38,20 @@
       <div class="content-header">
         <h2>{{ currentPlatform?.meta.name }}</h2>
         <p class="description">{{ currentPlatform?.meta.description }}</p>
+
+        <div class="tutorial-link">
+          <a href="https://clipper-hub.netlify.app/" target="_blank">
+            查看完整配置教程
+          </a>
+        </div>
       </div>
 
       <!-- Telegram 配置 -->
       <div v-if="activePlatformTab === 'telegram'" class="config-form">
         <div class="form-group">
           <label class="switch-label">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               v-model="platformConfigs.telegram.enabled"
               class="switch-input"
             />
@@ -61,7 +67,11 @@
             v-model="platformConfigs.telegram.botToken"
             placeholder="输入 Bot Token"
           />
-          <small>在 <a href="https://t.me/BotFather" target="_blank">@BotFather</a> 申请机器人获取 Token</small>
+          <small
+            >在
+            <a href="https://t.me/BotFather" target="_blank">@BotFather</a> 申请机器人获取
+            Token</small
+          >
         </div>
 
         <div class="form-group">
@@ -79,8 +89,8 @@
       <div v-if="activePlatformTab === 'discord'" class="config-form">
         <div class="form-group">
           <label class="switch-label">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               v-model="platformConfigs.discord.enabled"
               class="switch-input"
             />
@@ -98,15 +108,14 @@
           />
           <small>在 Discord 频道设置中创建 Webhook</small>
         </div>
-
       </div>
 
       <!-- Notion 配置 -->
       <div v-if="activePlatformTab === 'notion'" class="config-form">
         <div class="form-group">
           <label class="switch-label">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               v-model="platformConfigs.notion.enabled"
               class="switch-input"
             />
@@ -122,7 +131,13 @@
             v-model="platformConfigs.notion.integrationToken"
             placeholder="secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
           />
-          <small>在 <a href="https://www.notion.so/my-integrations" target="_blank">Notion Integrations</a> 创建 Integration 获取 Token</small>
+          <small
+            >在
+            <a href="https://www.notion.so/my-integrations" target="_blank"
+              >Notion Integrations</a
+            >
+            创建 Integration 获取 Token</small
+          >
         </div>
 
         <div class="form-group">
@@ -137,40 +152,53 @@
 
         <div class="form-group">
           <label>高级配置</label>
-          <details style="margin-top: 8px;">
-            <summary style="cursor: pointer; color: #666; font-size: 13px;">属性名称映射</summary>
-            <div style="margin-top: 12px; padding: 12px; background: #f9f9f9; border-radius: 6px;">
-              <div style="margin-bottom: 12px;">
-                <label style="font-size: 12px; color: #666;">标题字段名称</label>
+          <details style="margin-top: 8px">
+            <summary style="cursor: pointer; color: #666; font-size: 13px">
+              属性名称映射
+            </summary>
+            <div
+              style="
+                margin-top: 12px;
+                padding: 12px;
+                background: #f9f9f9;
+                border-radius: 6px;
+              "
+            >
+              <div style="margin-bottom: 12px">
+                <label style="font-size: 12px; color: #666">标题字段名称</label>
                 <input
                   type="text"
                   v-model="platformConfigs.notion.titleProperty"
                   placeholder="标题"
-                  style="margin-top: 4px;"
+                  style="margin-top: 4px"
                 />
               </div>
-              <div style="margin-bottom: 12px;">
-                <label style="font-size: 12px; color: #666;">内容字段名称</label>
+              <div style="margin-bottom: 12px">
+                <label style="font-size: 12px; color: #666">内容字段名称</label>
                 <input
                   type="text"
                   v-model="platformConfigs.notion.contentProperty"
                   placeholder="内容"
-                  style="margin-top: 4px;"
+                  style="margin-top: 4px"
                 />
               </div>
               <div>
-                <label style="font-size: 12px; color: #666;">来源字段名称</label>
+                <label style="font-size: 12px; color: #666">来源字段名称</label>
                 <input
                   type="text"
                   v-model="platformConfigs.notion.sourceProperty"
                   placeholder="来源"
-                  style="margin-top: 4px;"
+                  style="margin-top: 4px"
                 />
               </div>
             </div>
           </details>
-          <small style="display: block; margin-top: 8px;">
-            📚 没有数据库？<a href="https://anghunk.notion.site/2cad17511b968031a7ebeecd5e279c6a" target="_blank">复制该副本模板</a>
+          <small style="display: block; margin-top: 8px">
+            📚 没有数据库？<a
+              href="https://anghunk.notion.site/2cad17511b968031a7ebeecd5e279c6a"
+              target="_blank"
+              >复制该副本模板</a
+            >
           </small>
         </div>
       </div>
@@ -178,11 +206,9 @@
       <!-- 操作按钮 -->
       <div class="action-bar">
         <button @click="testConnection" :disabled="isLoading" class="btn btn-secondary">
-          {{ isLoading ? '测试中...' : '测试连接' }}
+          {{ isLoading ? "测试中..." : "测试连接" }}
         </button>
-        <button @click="saveSettings" class="btn btn-primary">
-          保存设置
-        </button>
+        <button @click="saveSettings" class="btn btn-primary">保存设置</button>
       </div>
 
       <!-- 状态消息 -->
@@ -219,7 +245,7 @@ const statusType = ref("info");
 const platforms = getAllPlatforms();
 
 // 当前选中的平台
-const currentPlatform = computed(() => 
+const currentPlatform = computed(() =>
   platforms.find(p => p.meta.id === activePlatformTab.value)
 );
 

@@ -47,7 +47,7 @@ export class NotionPlatform implements Platform {
 
     // 第一行作为标题，剩余作为内容
     const title = lines[0] || '未命名剪藏';
-    const content = lines.slice(1).join('\n') || text;
+    const content = lines.slice(1).join('\n');
 
     return { title, content, source };
   }
@@ -93,10 +93,16 @@ export class NotionPlatform implements Platform {
       };
     }
 
-    // 添加来源链接（URL 类型）
-    if (source && this.isValidUrl(source)) {
+    // 添加来源链接（Rich Text 类型）
+    if (source) {
       properties[sourceProp] = {
-        url: source,
+        rich_text: [
+          {
+            text: {
+              content: source.substring(0, 2000), // Notion 限制
+            },
+          },
+        ],
       };
     }
 

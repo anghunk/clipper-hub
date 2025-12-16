@@ -175,29 +175,38 @@ async function handleSave() {
     .filter((line) => line)
     .join("\n");
 
-  if (!editedContent.trim()) {
-    ElMessage.error('内容不能为空');
-    return;
-  }
-
   // 移除内容中的"来源:"行
   editedContent = editedContent
     .split("\n")
     .filter((line) => !line.startsWith("来源:"))
     .join("\n");
 
-  // 格式化消息
-  let message = "";
+  // 格式化消息 - 智能处理换行
+  const parts = [];
+  
+  // 添加标题
   if (customTitle) {
-    message = `${customTitle}\n\n${editedContent}`;
-  } else {
-    message = editedContent;
+    parts.push(customTitle);
   }
-
+  
+  // 添加内容
+  if (editedContent.trim()) {
+    parts.push(editedContent);
+  }
+  
   // 添加来源链接
   if (includeSource && editData.value.url) {
-    message += `\n\n来源: ${editData.value.url}`;
+    parts.push(`来源: ${editData.value.url}`);
   }
+  
+  // 检查是否至少有内容
+  if (parts.length === 0 || (parts.length === 1 && parts[0] === `来源: ${editData.value.url}`)) {
+    ElMessage.error('内容不能为空');
+    return;
+  }
+  
+  // 用双换行连接各部分
+  const message = parts.join("\n\n");
 
   // 发送到所有已启用的平台
   isSending.value = true;
