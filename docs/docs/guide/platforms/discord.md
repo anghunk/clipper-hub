@@ -1,6 +1,6 @@
 # Discord
 
-本文档介绍如何配置 Discord 平台以使用 Clipper Hub。
+本文档介绍如何配置 Discord 平台以使用 Clipper hub。
 
 ## 📋 前置要求
 
@@ -31,7 +31,7 @@ Discord Webhook 是一种简单的方式，允许外部应用向 Discord 频道�
 1. 在左侧菜单中选择"整合"（Integrations）
 2. 点击"Webhook"部分
 3. 点击"新建 Webhook"按钮
-4. 为 Webhook 命名（例如：`Clipper Hub`）
+4. 为 Webhook 命名（例如：`Clipper hub`）
 5. （可选）上传一个头像图标
 6. 选择要发送消息的频道
 7. 点击"复制 Webhook URL"按钮
@@ -50,9 +50,9 @@ https://discord.com/api/webhooks/1234567890123456789/AbCdEfGhIjKlMnOpQrStUvWxYz1
 - 不要在公开场合分享此 URL
 - 如果 URL 泄露，可以删除并重新创建 Webhook
 
-## ⚙️ 第二步：在 Clipper Hub 中配置
+## ⚙️ 第二步：在 Clipper hub 中配置
 
-1. 打开 Clipper Hub 扩展
+1. 打开 Clipper hub 扩展
 2. 点击右上角的"设置"按钮
 3. 在侧边栏选择"Discord"平台
 4. 填写配置信息：
@@ -114,7 +114,7 @@ https://discord.com/api/webhooks/1234567890123456789/AbCdEfGhIjKlMnOpQrStUvWxYz1
 **解决方法：**
 1. 立即删除被滥用的 Webhook
 2. 创建新的 Webhook
-3. 更新 Clipper Hub 配置
+3. 更新 Clipper hub 配置
 4. 妥善保管新的 URL
 
 ### Q: 如何删除 Webhook？

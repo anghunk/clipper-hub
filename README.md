@@ -1,12 +1,12 @@
-![](./public/icon/128.png)
+![](./public/icon/48.png)
 
-## Clipper Hub - 万能剪藏
+## Clipper hub - 万能剪藏
 
 > 将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord、Notion 等多个平台，让你的灵感和收藏无处不在。
 
 正在申请商店发布中，请耐心等待~~
 
-<img width="2022" height="1378" alt="frame_generic_dark" src="https://github.com/user-attachments/assets/5b6678fe-aff9-4220-aac1-813777c80f23" />
+![previews](https://github.com/user-attachments/assets/5b6678fe-aff9-4220-aac1-813777c80f23)
 
 ## ✨ 功能特性
 
@@ -61,8 +61,7 @@ npm run compile          # TypeScript 类型检查
 
 **详细配置教程：**
 
-- [Telegram 配置指南](./docs/platforms/telegram.md)
-- [Discord 配置指南](./docs/platforms/discord.md)
+- [Clipper hub 配置指南](https://clipper-hub.netlify.app/)
 
 ## 🏗️ 项目架构
 

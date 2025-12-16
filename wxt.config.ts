@@ -21,7 +21,7 @@ export default defineConfig({
 	}),
 	modules: ['@wxt-dev/module-vue'],
 	manifest: {
-		name: 'Clipper Hub - 万能剪藏',
+		name: 'Clipper hub - 万能剪藏',
 		version: pkg.version,
 		description:
 			'将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord、Notion 等多个平台，让你的灵感和收藏无处不在。',

@@ -4,7 +4,7 @@ import AutoSidebar from 'vite-plugin-vitepress-auto-sidebar';
 const taskLists = require('markdown-it-task-checkbox')
 
 export default {
-  title: 'Clipper Hub - 万能剪藏',
+  title: 'Clipper hub - 万能剪藏',
   dist: '/dist',
   head: [
     ['link', {
@@ -36,7 +36,7 @@ export default {
   },
   ignoreDeadLinks: true,
   themeConfig: {
-    siteTitle: 'Clipper Hub - 万能剪藏',
+    siteTitle: 'Clipper hub - 万能剪藏',
     nav,
     editLink: {
       pattern: 'https://github.com/anghunk/clipper-hub/blob/main/docs/docs/:path',

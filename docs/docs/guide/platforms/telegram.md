@@ -1,6 +1,6 @@
 # Telegram
 
-本文档介绍如何配置 Telegram 平台以使用 Clipper Hub。
+本文档介绍如何配置 Telegram 平台以使用 Clipper hub。
 
 ## 📋 前置要求
 
@@ -90,9 +90,9 @@ Bot Token 格式类似：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`
 3. 查看浏览器地址栏的 URL
 4. URL 中会包含频道 ID（格式：`-100xxxxxxxxxx`）
 
-## ⚙️ 第五步：在 Clipper Hub 中配置
+## ⚙️ 第五步：在 Clipper hub 中配置
 
-1. 打开 Clipper Hub 扩展
+1. 打开 Clipper hub 扩展
 2. 点击右上角的"设置"按钮
 3. 在侧边栏选择"Telegram"平台
 4. 填写配置信息：
@@ -146,7 +146,7 @@ Bot Token 格式类似：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`
 
 ### Q: 如何获取群组 ID？
 
-**说明：** Clipper Hub 主要用于频道，但也支持群组
+**说明：** Clipper hub 主要用于频道，但也支持群组
 
 **步骤：**
 1. 将 Bot 添加到群组
