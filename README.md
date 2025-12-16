@@ -25,9 +25,8 @@
 | Telegram | ✅ 支持  | 通过 Bot API 发送到频道         |
 | Discord  | ✅ 支持  | 通过 Webhook 发送到频道         |
 | Notion   | ✅ 支持  | 通过 Notion API 发送到 Database |
-| Obsidian | 🚧 计划 |                                 |
-| 飞书文档 | 🚧 计划 |                                 |
-| 语雀笔记 | 🚧 计划 |                                 |
+| 飞书文档 | 🚧 计划 | 目前需要付费实现 webhook 功能   |
+| 语雀笔记 | 🚧 计划 | 需要超级会员开放 token 功能     |
 
 ## 🚀 快速开始
 

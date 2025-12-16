@@ -1,4 +1,4 @@
-# Telegram 平台配置指南
+# Telegram
 
 本文档介绍如何配置 Telegram 平台以使用 Clipper Hub。
 
@@ -97,11 +97,11 @@ Bot Token 格式类似：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`
 3. 在侧边栏选择"Telegram"平台
 4. 填写配置信息：
 
-   | 字段 | 说明 | 示例 |
-   |------|------|------|
-   | **Bot Token** | 从 BotFather 获取的 Token | `123456789:ABCdefGHI...` |
-   | **Channel ID** | 频道 ID 或用户名 | `@mychannel` 或 `-1001234567890` |
-   | **启用** | 是否启用该平台 | ✅ 开启 |
+   | 字段           | 说明                      | 示例                             |
+   | -------------- | ------------------------- | -------------------------------- |
+   | **Bot Token**  | 从 BotFather 获取的 Token | `123456789:ABCdefGHI...`         |
+   | **Channel ID** | 频道 ID 或用户名          | `@mychannel` 或 `-1001234567890` |
+   | **启用**       | 是否启用该平台            | ✅ 开启                          |
 
 5. 点击"测试连接"按钮验证配置
 6. 如果测试成功，会在频道中收到一条测试消息
@@ -178,15 +178,3 @@ Bot Token 格式类似：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`
 - 收藏分享频道
 
 只需在设置页面配置不同的 Bot Token 和 Channel ID 即可。
-
-### 自定义消息格式
-
-Telegram 支持 Markdown 格式，你可以在编辑模式中使用：
-- `*粗体*` - **粗体**
-- `_斜体_` - *斜体*
-- `` `代码` `` - `代码`
-- `[链接](url)` - 超链接
-
----
-
-🎉 配置完成！现在你可以开始使用 Telegram 平台收藏精彩内容了！

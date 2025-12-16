@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: 配置指南
-      link: /platforms/discord
+      link: /guide/platforms/discord
     - theme: alt
       text: GitHub
       link: https://github.com/anghunk/clipper-hub
@@ -35,7 +35,7 @@ features:
 
 **Q: 如何添加新的平台支持？**
 
-A: 参考 [开发文档 - 添加新平台](/development/add-platform.md)
+A: 参考 [开发文档 - 添加新平台](/guide/development/add-platform.md)
 
 **Q: 消息发送失败怎么办？**
 

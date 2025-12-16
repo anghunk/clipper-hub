@@ -1,4 +1,4 @@
-# Discord 平台配置指南
+# Discord
 
 本文档介绍如何配置 Discord 平台以使用 Clipper Hub。
 
@@ -76,34 +76,6 @@ https://discord.com/api/webhooks/1234567890123456789/AbCdEfGhIjKlMnOpQrStUvWxYz1
 2. 查看 Discord 频道是否收到消息
 3. 在网页上选中文字，右键发送测试
 
-## 🎨 自定义设置
-
-### 自定义用户名
-
-在配置中填写"用户名"字段，消息将以该名称显示：
-
-```
-用户名: My Clipper
-```
-
-如果不填写，将使用创建 Webhook 时设置的默认名称。
-
-### 自定义头像
-
-在配置中填写"头像 URL"字段，提供一个公开可访问的图片 URL：
-
-```
-头像 URL: https://i.imgur.com/abc123.png
-```
-
-支持的格式：
-- ✅ PNG
-- ✅ JPG/JPEG
-- ✅ GIF
-- ✅ WebP
-
-## 🔧 常见问题
-
 ### Q: 提示"Invalid Webhook Token"
 
 **原因：** Webhook URL 错误或无效
@@ -122,15 +94,6 @@ https://discord.com/api/webhooks/1234567890123456789/AbCdEfGhIjKlMnOpQrStUvWxYz1
 1. 确认你有查看该频道的权限
 2. 检查频道设置中的消息过滤选项
 3. 刷新 Discord 客户端
-
-### Q: 头像或用户名没有生效
-
-**原因：** URL 格式错误或图片无法访问
-
-**解决方法：**
-1. 确保头像 URL 是公开可访问的
-2. 在浏览器中直接打开 URL，测试图片是否能加载
-3. 用户名不能为空或包含特殊字符
 
 ### Q: 消息被限流
 
@@ -163,36 +126,6 @@ https://discord.com/api/webhooks/1234567890123456789/AbCdEfGhIjKlMnOpQrStUvWxYz1
 4. 点击"删除 Webhook"按钮
 5. 确认删除
 
-## 📚 消息格式
-
-Discord Webhook 支持多种消息格式：
-
-### 普通文本
-
-```
-这是一条普通消息
-```
-
-### Markdown 格式
-
-Discord 支持以下 Markdown 语法：
-
-- `**粗体**` - **粗体**
-- `*斜体*` - *斜体*
-- `__下划线__` - __下划线__
-- `~~删除线~~` - ~~删除线~~
-- `` `代码` `` - `代码`
-- ` ```代码块``` ` - 代码块
-- `[链接](url)` - 超链接
-
-### Emoji
-
-支持 Discord 和 Unicode Emoji：
-
-```
-这是一条带 emoji 的消息 🎉 ✨ 🚀
-```
-
 ## 🔐 安全建议
 
 1. **定期更换 Webhook**
@@ -214,8 +147,6 @@ Discord 支持以下 Markdown 语法：
 ## 📚 相关资源
 
 - [Discord Webhook 官方文档](https://discord.com/developers/docs/resources/webhook)
-- [Discord Markdown 文本格式](https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-)
-- [Discord 开发者门户](https://discord.com/developers/applications)
 
 ## 💡 高级技巧
 
@@ -227,24 +158,3 @@ Discord 支持以下 Markdown 语法：
 - 公开分享频道
 
 每个 Webhook 可以配置不同的名称和头像。
-
-### 富文本嵌入（Embeds）
-
-Discord Webhook 支持发送富文本嵌入消息，但 Clipper Hub 目前使用简单文本格式。如需自定义，可以修改 `lib/platforms/discord.ts` 文件。
-
-示例富文本格式：
-
-```json
-{
-  "embeds": [{
-    "title": "标题",
-    "description": "描述内容",
-    "color": 3447003,
-    "url": "https://example.com"
-  }]
-}
-```
-
----
-
-🎉 配置完成！现在你可以开始使用 Discord 平台收藏精彩内容了！

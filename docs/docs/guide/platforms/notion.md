@@ -1,4 +1,4 @@
-# Notion 配置指南
+# Notion
 
 本文档介绍如何配置 Clipper Hub 将内容保存到 Notion 数据库。
 
@@ -29,25 +29,11 @@
 
 ### 步骤 2: 创建 Notion 数据库
 
-#### 方法 1: 从模板创建（推荐）
+从模板数据库创建副本。
 
-1. 在 Notion 中创建一个新页面
-2. 输入 `/database` 并选择 **Table - Full page**
-3. 添加以下属性（列）：
-
-| 属性名称 | 类型 | 说明 | 必需 |
-|---------|------|------|------|
-| Name | Title | 剪藏标题 | ✅ 必需 |
-| Content | Text | 剪藏内容 | ✅ 推荐 |
-| Source | URL | 来源链接 | 推荐 |
-| Created | Created time | 创建时间 | 可选 |
-| Tags | Multi-select | 标签分类 | 可选 |
-
-#### 方法 2: 使用现有数据库
-
-如果你想使用已有的数据库，请确保至少包含以下属性：
-- **一个 Title 类型的属性**（用于存储标题）
-- **一个 Text 类型的属性**（用于存储内容）
+```shell
+https://anghunk.notion.site/2cad17511b968031a7ebeecd5e279c6a
+```
 
 ---
 
@@ -75,6 +61,7 @@
 3. 复制 `database-id` 部分
 
 **示例 URL**:
+
 ```
 https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
                                  ↑ 这部分是 Database ID
@@ -87,6 +74,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 3. 粘贴链接，从中提取 Database ID
 
 **Database ID 格式**:
+
 - 带连字符: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 - 不带连字符: `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
@@ -103,9 +91,9 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
    - **Integration Token**: 粘贴步骤 1 中获取的 Token
    - **Database ID**: 粘贴步骤 4 中获取的 ID
 4. （可选）配置高级选项：
-   - **标题字段名称**: 默认 `Name`，如果你的数据库使用其他名称，请修改
-   - **内容字段名称**: 默认 `Content`
-   - **来源字段名称**: 默认 `Source`
+   - **标题字段名称**: 默认 `标题`，如果你的数据库使用其他名称，请修改
+   - **内容字段名称**: 默认 `内容`
+   - **来源字段名称**: 默认 `来源`
 5. 点击 **"测试连接"** 验证配置
 6. 点击 **"保存设置"**
 
@@ -137,19 +125,17 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 
 ### 保存的内容结构
 
-| 字段 | 内容 |
-|------|------|
-| Name (标题) | 剪藏内容的第一行，或自定义标题 |
-| Content (内容) | 剪藏的正文内容 |
-| Source (来源) | 网页 URL（如果有） |
-| Created (创建时间) | 自动记录 |
+| 字段   | 内容                           |
+| ------ | ------------------------------ |
+| (标题) | 剪藏内容的第一行，或自定义标题 |
+| (内容) | 剪藏的正文内容                 |
+| (来源) | 网页 URL（如果有）             |
 
 ### 示例数据
 
-**Name**: `如何使用 Notion API`  
-**Content**: `Notion API 是一个强大的工具，可以让你通过编程方式访问 Notion 的数据...`  
-**Source**: `https://developers.notion.com/docs`  
-**Created**: `2025-12-15 21:00:00`
+**标题**: `如何使用 Notion API`  
+**内容**: `Notion API 是一个强大的工具，可以让你通过编程方式访问 Notion 的数据...`  
+**来源**: `https://developers.notion.com/docs`  
 
 ---
 
@@ -160,6 +146,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 **原因**: Token 输入错误或已失效
 
 **解决方法**:
+
 1. 检查 Token 是否完整复制（包含 `secret_` 前缀）
 2. 前往 [Notion Integrations](https://www.notion.so/my-integrations) 重新生成 Token
 3. 确保 Integration 状态为 Active
@@ -168,11 +155,13 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 
 ### Q2: 提示 "Database ID 不存在或 Integration 未连接"
 
-**原因**: 
+**原因**:
+
 - Database ID 错误
 - 忘记将 Integration 连接到数据库
 
 **解决方法**:
+
 1. 检查 Database ID 是否正确
 2. 确保已执行 **步骤 3**（连接 Integration 到数据库）
 3. 在数据库页面点击 `...` → `Connections`，确认你的 Integration 已连接
@@ -184,6 +173,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 **原因**: 数据库属性配置不匹配
 
 **解决方法**:
+
 1. 检查数据库是否有 **Title 类型** 的属性（用于标题）
 2. 检查 **高级配置** 中的字段名称是否与数据库属性名称完全一致
 3. 属性名称区分大小写，例如 `Name` ≠ `name`
@@ -195,6 +185,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 **原因**: Notion Rich Text 单个块限制 2000 字符
 
 **解决方法**:
+
 - 内容会自动分割成多个块，这是正常行为
 - 如需保存超长文本，建议在编辑窗口中适当精简内容
 
@@ -212,6 +203,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 ### Q6: 可以保存到多个数据库吗？
 
 当前版本只支持配置一个数据库。如需切换：
+
 1. 修改 Database ID
 2. 确保新数据库已连接 Integration
 3. 保存设置
@@ -232,38 +224,3 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 - [Notion API 官方文档](https://developers.notion.com/)
 - [Notion Integrations 管理](https://www.notion.so/my-integrations)
 - [创建数据库属性说明](https://www.notion.so/help/guides/creating-a-database)
-
----
-
-## 💡 使用技巧
-
-### 1. 配合标签使用
-
-在数据库中添加 `Tags` 属性（Multi-select 类型），可以手动为剪藏内容添加标签进行分类。
-
-### 2. 使用视图过滤
-
-创建不同的数据库视图（View）来组织内容：
-- **最近剪藏**: 按创建时间降序排序
-- **待阅读**: 添加 `Status` 属性，筛选未读内容
-- **按来源**: 按 `Source` 分组
-
-### 3. 自动化工作流
-
-结合 Notion 的自动化功能，可以：
-- 自动给新剪藏添加默认标签
-- 发送提醒通知
-- 同步到其他页面
-
----
-
-## 🤝 反馈与支持
-
-如有问题或建议，欢迎：
-- 提交 GitHub Issue
-- 查看项目文档
-- 参与社区讨论
-
----
-
-⭐ 祝你剪藏愉快！
