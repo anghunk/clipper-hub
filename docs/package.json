@@ -15,7 +15,6 @@
     "markdown-it-task-checkbox": "^1.0.6",
     "medium-zoom": "^1.0.8",
     "vite-plugin-vitepress-auto-sidebar": "^1.7.0",
-    "vitepress-plugin-codeblocks-fold": "^1.2.27",
     "vitepress-plugin-rss": "^0.2.4",
     "yarn": "^1.22.21"
   }

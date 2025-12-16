@@ -33,16 +33,21 @@
 ### 1. 安装
 
 ```bash
-cd clipper-hub
+# 开发
+npm run dev              # Chrome 开发模式
+npm run dev:firefox      # Firefox 开发模式
 
-# 安装依赖
-npm install
+# 构建
+npm run build            # 构建 Chrome 版本
+npm run build:firefox    # 构建 Firefox 版本
 
-# 开发模式
-npm run dev
+# 打包
+npm run zip              # 打包 Chrome 版本为 zip
+npm run zip:firefox      # 打包 Firefox 版本为 zip
+npm run publish          # 构建并打包所有版本
 
-# 构建生产版本
-npm run build
+# 其他
+npm run compile          # TypeScript 类型检查
 ```
 
 ### 3. 配置平台
@@ -91,26 +96,6 @@ clipper-hub/
 - **平台实现**：每个平台独立实现 Platform 接口
 - **平台管理器**：统一管理所有平台的配置和调用
 - **易于扩展**：新增平台只需实现 Platform 接口即可
-
-## 📝 开发命令
-
-```bash
-# 开发
-npm run dev              # Chrome 开发模式
-npm run dev:firefox      # Firefox 开发模式
-
-# 构建
-npm run build            # 构建 Chrome 版本
-npm run build:firefox    # 构建 Firefox 版本
-
-# 打包
-npm run zip              # 打包 Chrome 版本为 zip
-npm run zip:firefox      # 打包 Firefox 版本为 zip
-npm run publish          # 构建并打包所有版本
-
-# 其他
-npm run compile          # TypeScript 类型检查
-```
 
 ## 🔧 常见问题
 
