@@ -23,14 +23,23 @@ export default defineConfig({
 	manifest: {
 		name: 'Clipper Hub - 万能剪藏',
 		version: pkg.version,
-		description: '将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord 等多个平台，让你的灵感和收藏无处不在。',
+		description:
+			'将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord 等多个平台，让你的灵感和收藏无处不在。',
 		permissions: ['contextMenus', 'storage', 'notifications', 'scripting'],
 		host_permissions: [
 			'https://api.telegram.org/*',
 			'https://discord.com/*',
 			'https://discordapp.com/*',
 			'https://api.notion.com/*',
-			'<all_urls>'
+			'<all_urls>',
 		],
-	},
+		browser_specific_settings: {
+			gecko: {
+				// @ts-ignore - data_collection_permissions 是 Firefox 要求的新属性
+				data_collection_permissions: {
+					required: ['none'],
+				},
+			} as any,
+		},
+	} as any,
 });
