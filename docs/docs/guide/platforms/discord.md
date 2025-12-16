@@ -36,6 +36,8 @@ Discord Webhook 是一种简单的方式，允许外部应用向 Discord 频道�
 6. 选择要发送消息的频道
 7. 点击"复制 Webhook URL"按钮
 
+<img width="1886" height="969" alt="image" src="https://github.com/user-attachments/assets/4285aa30-9760-40cb-8a4f-9898c44fec20" />
+
 ### 3. Webhook URL 格式
 
 复制的 URL 应该类似于：
@@ -60,8 +62,6 @@ https://discord.com/api/webhooks/1234567890123456789/AbCdEfGhIjKlMnOpQrStUvWxYz1
    | 字段 | 说明 | 必填 | 示例 |
    |------|------|------|------|
    | **Webhook URL** | 从 Discord 复制的完整 URL | ✅ 是 | `https://discord.com/api/webhooks/...` |
-   | **用户名** | 自定义发送者名称 | ❌ 否 | `Clipper Bot` |
-   | **头像 URL** | 自定义发送者头像 | ❌ 否 | `https://example.com/avatar.png` |
    | **启用** | 是否启用该平台 | ✅ 是 | ✅ 开启 |
 
 5. 点击"测试连接"按钮验证配置
