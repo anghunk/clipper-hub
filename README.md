@@ -61,7 +61,7 @@ npm run compile          # TypeScript 类型检查
 
 **详细配置教程：**
 
-- [Clipper Hub d](https://clipper-hub.netlify.app/)
+- [Clipper Hub 配置文档](https://clipper-hub.netlify.app/)
 
 ## 🏗️ 项目架构
 
@@ -100,7 +100,7 @@ clipper-hub/
 
 **Q: 如何添加新的平台支持？**
 
-A: 参考 [开发文档 - 添加新平台](./docs/development/add-platform.md)
+A: 参考 [开发文档 - 添加新平台](./docs/docs/guide/development/add-platform.md)
 
 **Q: 消息发送失败怎么办？**
 
@@ -125,8 +125,9 @@ A: 使用本地浏览器的 `browser.storage.sync` API 存储，数据会在同�
 ### 添加新平台
 
 如果你想添加对新平台的支持，请参考：
+
 - [平台开发文档](./docs/development/add-platform.md)
-- 现有平台实现：[telegram.ts](./lib/platforms/telegram.ts)、[discord.ts](./lib/platforms/discord.ts)
+- 现有平台实现：[telegram.ts](./lib/platforms/telegram.ts)、[discord.ts](./lib/platforms/discord.ts) 等其他。
 
 ## 📄 许可证
 
