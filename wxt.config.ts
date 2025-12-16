@@ -24,7 +24,7 @@ export default defineConfig({
 		name: 'Clipper Hub - 万能剪藏',
 		version: pkg.version,
 		description:
-			'将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord 等多个平台，让你的灵感和收藏无处不在。',
+			'将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord、Notion 等多个平台，让你的灵感和收藏无处不在。',
 		permissions: ['contextMenus', 'storage', 'notifications', 'scripting'],
 		host_permissions: [
 			'https://api.telegram.org/*',
