@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: Clipper hub - 万能剪藏
+  name: Clipper Hub - 万能剪藏
   tagline: 将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord、Notion 等多个平台，让你的灵感和收藏无处不在。
   image:
     src: https://github.com/anghunk/clipper-hub/blob/main/public/icon/128.png?raw=true

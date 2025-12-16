@@ -2,7 +2,7 @@
   <div class="popup-container">
     <!-- 顶部标题栏 -->
     <div class="header">
-      <h1>Clipper hub - 万能剪藏</h1>
+      <h1>Clipper Hub - 万能剪藏</h1>
       <button
         @click="openSettings"
         class="settings-btn"

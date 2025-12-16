@@ -162,7 +162,7 @@ export class NotionPlatform implements Platform {
 
     const testMessage = `🔗 连接测试成功!
 
-这是来自 Clipper hub 的测试消息
+这是来自 Clipper Hub 的测试消息
 
 时间: ${new Date().toLocaleString('zh-CN')}`;
     return this.sendMessage(testMessage, notionConfig);

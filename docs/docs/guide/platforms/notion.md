@@ -1,6 +1,6 @@
 # Notion
 
-本文档介绍如何配置 Clipper hub 将内容保存到 Notion 数据库。
+本文档介绍如何配置 Clipper Hub 将内容保存到 Notion 数据库。
 
 ## 📋 前置要求
 
@@ -17,7 +17,7 @@
 1. 访问 [Notion Integrations](https://www.notion.so/my-integrations)
 2. 点击 **"+ New integration"** 创建新的 Integration
 3. 填写以下信息：
-   - **Name**: `Clipper hub`（或任意名称）
+   - **Name**: `Clipper Hub`（或任意名称）
    - **Associated workspace**: 选择你的工作空间
    - **Type**: 选择 **Internal Integration**
 4. 点击 **"Submit"** 创建
@@ -42,7 +42,7 @@ https://anghunk.notion.site/2cad17511b968031a7ebeecd5e279c6a
 1. 打开你创建的数据库页面
 2. 点击右上角的 **"..."** 菜单
 3. 选择 **"Connections"** → **"Connect to"**
-4. 在列表中找到你刚创建的 Integration（如 `Clipper hub`）
+4. 在列表中找到你刚创建的 Integration（如 `Clipper Hub`）
 5. 点击连接
 
 > ⚠️ **必须执行此步骤**，否则 Integration 无法访问数据库
@@ -82,9 +82,9 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 
 ---
 
-### 步骤 5: 在 Clipper hub 中配置
+### 步骤 5: 在 Clipper Hub 中配置
 
-1. 打开 Clipper hub 设置页面
+1. 打开 Clipper Hub 设置页面
 2. 在左侧选择 **"Notion"**
 3. 填写配置信息：
    - **启用 Notion**: 打开开关
@@ -104,7 +104,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 ### 1. 快速发送
 
 1. 在网页上选中文字
-2. 右键选择 **"Clipper hub - 万能剪藏"** → **"发送选中文字"**
+2. 右键选择 **"Clipper Hub - 万能剪藏"** → **"发送选中文字"**
 3. 内容会自动保存到 Notion 数据库
 
 ### 2. 编辑后发送
@@ -115,7 +115,7 @@ https://www.notion.so/myworkspace/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4?v=123456
 
 ### 3. 收藏网页
 
-1. 打开 Clipper hub 插件弹窗
+1. 打开 Clipper Hub 插件弹窗
 2. 点击 **"收藏当前页面"**
 3. 网页标题和链接会保存到 Notion
 

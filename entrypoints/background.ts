@@ -3,14 +3,14 @@ import { browser } from 'wxt/browser';
 import { sendToAllEnabled, hasAnyConfigured, type SendResult, type PlatformType } from '@/lib/platforms';
 
 export default defineBackground(() => {
-  console.log('Clipper hub - 万能剪藏 - 后台服务启动', { id: browser.runtime.id });
+  console.log('Clipper Hub - 万能剪藏 - 后台服务启动', { id: browser.runtime.id });
 
   // Create context menu when extension is installed
   browser.runtime.onInstalled.addListener(() => {
     // Parent menu
     browser.contextMenus.create({
       id: "telegramParent",
-      title: "Clipper hub - 万能剪藏",
+      title: "Clipper Hub - 万能剪藏",
       contexts: ["all"]
     });
 

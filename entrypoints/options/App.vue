@@ -3,7 +3,7 @@
     <!-- 侧边栏 -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h1>Clipper hub - 设置</h1>
+        <h1>Clipper Hub - 设置</h1>
       </div>
       
       <div class="sidebar-section">
