@@ -15,8 +15,8 @@ hero:
       text: GitHub
       link: https://github.com/anghunk/clipper-hub
     - theme: alt
-      text: Chrome Web Store(暂未上架)
-      link: https://github.com/anghunk/clipper-hub
+      text: Chrome Web Store
+      link: https://chromewebstore.google.com/detail/hnpnidoofhkekffllchemjiiffpafhhd
 
 features:
   - icon: 🚀
