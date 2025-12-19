@@ -72,16 +72,16 @@ export interface Platform {
 export function getEnvDefaultConfigs(): AllPlatformConfigs {
 	return {
 		telegram: {
-			enabled: import.meta.env.VITE_TELEGRAM_ENABLED === 'false',
+			enabled: import.meta.env.VITE_TELEGRAM_ENABLED === 'true',
 			botToken: import.meta.env.VITE_TELEGRAM_BOT_TOKEN || '',
 			channelId: import.meta.env.VITE_TELEGRAM_CHANNEL_ID || '',
 		},
 		discord: {
-			enabled: import.meta.env.VITE_DISCORD_ENABLED === 'false',
+			enabled: import.meta.env.VITE_DISCORD_ENABLED === 'true',
 			webhookUrl: import.meta.env.VITE_DISCORD_WEBHOOK_URL || '',
 		},
 		notion: {
-			enabled: import.meta.env.VITE_NOTION_ENABLED === 'false',
+			enabled: import.meta.env.VITE_NOTION_ENABLED === 'true',
 			integrationToken: import.meta.env.VITE_NOTION_INTEGRATION_TOKEN || '',
 			databaseId: import.meta.env.VITE_NOTION_DATABASE_ID || '',
 			titleProperty: '标题',
