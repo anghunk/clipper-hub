@@ -64,7 +64,7 @@ jobs:
         | ------------------------------- | --------------------------------------------------------------------------------------------- | -------- |
         | **Chrome / Edge / Arc / Brave** | [Chrome Web Store](https://chromewebstore.google.com/detail/hnpnidoofhkekffllchemjiiffpafhhd) | 推荐     |
         | **Firefox**                     | [Firefox Addons](https://addons.mozilla.org/zh-CN/firefox/addon/clipper-hub/)            | 推荐     |
-        | **国内用户**                    | [Crx 商店](https://www.crxsoso.com/webstore/detail/fbgblmjbeebanackldpbmpacppflgmlj)          | 无需翻墙 |
+        | **国内用户**                    | [Crx 商店](https://www.crxsoso.com/webstore/detail/hnpnidoofhkekffllchemjiiffpafhhd)          | 无需翻墙 |
         
         发布于：$CURRENT_DATE" \
         .output/*.zip
