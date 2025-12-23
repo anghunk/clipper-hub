@@ -4,7 +4,8 @@
       <label class="switch-label">
         <input
           type="checkbox"
-          v-model="config.enabled"
+          :checked="config.enabled"
+          @change="updateEnabled"
           class="switch-input"
         />
         <span class="switch-slider"></span>
@@ -16,7 +17,8 @@
       <label>{{ t('options.discord.webhookUrl') }}</label>
       <input
         type="text"
-        v-model="config.webhookUrl"
+        :value="config.webhookUrl"
+        @input="updateWebhookUrl"
         :placeholder="t('options.discord.webhookUrlPlaceholder')"
       />
       <small>{{ t('options.discord.webhookUrlHint') }}</small>
@@ -33,4 +35,14 @@ const config = defineModel<{
   enabled: boolean;
   webhookUrl: string;
 }>('config', { required: true });
+
+function updateEnabled(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, enabled: target.checked };
+}
+
+function updateWebhookUrl(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, webhookUrl: target.value };
+}
 </script>

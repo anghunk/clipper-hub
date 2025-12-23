@@ -11,13 +11,12 @@
       </div>
     </div>
 
-    <DiscordConfig v-model:config="config" />
+    <DiscordConfig v-model:config="config" @update:config="handleConfigChange" />
 
     <div class="action-bar">
       <button @click="testConnection" :disabled="isLoading" class="btn btn-secondary">
         {{ isLoading ? t('common.testing') : t('common.test') }}
       </button>
-      <button @click="saveSettings" class="btn btn-primary">{{ t('options.saveSettings') }}</button>
     </div>
 
     <div v-if="statusMessage" :class="['status-message', statusType]">
@@ -27,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import DiscordConfig from '../components/DiscordConfig.vue';
 import {
@@ -40,11 +39,16 @@ import {
 } from '@/lib/platforms';
 
 const { t } = useI18n();
+const emit = defineEmits<{
+  (e: 'configSaved'): void;
+}>();
 
+const parentPlatformConfigs = inject<any>('platformConfigs');
 const platformConfigs = ref<AllPlatformConfigs>({ ...defaultConfigs });
 const isLoading = ref(false);
 const statusMessage = ref('');
 const statusType = ref('info');
+let saveTimeout: NodeJS.Timeout | null = null;
 
 const config = computed({
   get: () => platformConfigs.value.discord,
@@ -56,6 +60,25 @@ const config = computed({
 const platform = computed(() => 
   getAllPlatforms().find(p => p.meta.id === 'discord')
 );
+
+function handleConfigChange() {
+  if (saveTimeout) {
+    clearTimeout(saveTimeout);
+  }
+  
+  saveTimeout = setTimeout(async () => {
+    try {
+      await saveAllConfigs(platformConfigs.value);
+      emit('configSaved');
+      showStatus(`✅ ${t('options.saveSuccess')}`, 'success');
+      setTimeout(() => {
+        statusMessage.value = '';
+      }, 2000);
+    } catch (error: any) {
+      showStatus(`❌ ${t('options.saveFailed')}: ${error.message}`, 'error');
+    }
+  }, 200);
+}
 
 onMounted(async () => {
   try {
@@ -81,18 +104,6 @@ async function testConnection() {
     showStatus(`❌ ${t('options.networkError')}: ${error.message}`, 'error');
   } finally {
     isLoading.value = false;
-  }
-}
-
-async function saveSettings() {
-  try {
-    await saveAllConfigs(platformConfigs.value);
-    showStatus(`✅ ${t('options.saveSuccess')}`, 'success');
-    setTimeout(() => {
-      statusMessage.value = '';
-    }, 3000);
-  } catch (error: any) {
-    showStatus(`❌ ${t('options.saveFailed')}: ${error.message}`, 'error');
   }
 }
 

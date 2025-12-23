@@ -4,7 +4,8 @@
       <label class="switch-label">
         <input
           type="checkbox"
-          v-model="config.enabled"
+          :checked="config.enabled"
+          @change="updateEnabled"
           class="switch-input"
         />
         <span class="switch-slider"></span>
@@ -16,7 +17,8 @@
       <label>{{ t('options.notion.integrationToken') }}</label>
       <input
         type="text"
-        v-model="config.integrationToken"
+        :value="config.integrationToken"
+        @input="updateIntegrationToken"
         :placeholder="t('options.notion.integrationTokenPlaceholder')"
       />
       <small>
@@ -30,7 +32,8 @@
       <label>{{ t('options.notion.databaseId') }}</label>
       <input
         type="text"
-        v-model="config.databaseId"
+        :value="config.databaseId"
+        @input="updateDatabaseId"
         :placeholder="t('options.notion.databaseIdPlaceholder')"
       />
       <small>{{ t('options.notion.databaseIdHint') }}</small>
@@ -54,7 +57,8 @@
             <label style="font-size: 12px; color: #666">{{ t('options.notion.titleProperty') }}</label>
             <input
               type="text"
-              v-model="config.titleProperty"
+              :value="config.titleProperty || ''"
+              @input="updateTitleProperty"
               :placeholder="t('options.notion.titlePropertyPlaceholder')"
               style="margin-top: 4px"
             />
@@ -63,7 +67,8 @@
             <label style="font-size: 12px; color: #666">{{ t('options.notion.contentProperty') }}</label>
             <input
               type="text"
-              v-model="config.contentProperty"
+              :value="config.contentProperty || ''"
+              @input="updateContentProperty"
               :placeholder="t('options.notion.contentPropertyPlaceholder')"
               style="margin-top: 4px"
             />
@@ -72,7 +77,8 @@
             <label style="font-size: 12px; color: #666">{{ t('options.notion.sourceProperty') }}</label>
             <input
               type="text"
-              v-model="config.sourceProperty"
+              :value="config.sourceProperty || ''"
+              @input="updateSourceProperty"
               :placeholder="t('options.notion.sourcePropertyPlaceholder')"
               style="margin-top: 4px"
             />
@@ -102,4 +108,34 @@ const config = defineModel<{
   contentProperty?: string;
   sourceProperty?: string;
 }>('config', { required: true });
+
+function updateEnabled(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, enabled: target.checked };
+}
+
+function updateIntegrationToken(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, integrationToken: target.value };
+}
+
+function updateDatabaseId(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, databaseId: target.value };
+}
+
+function updateTitleProperty(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, titleProperty: target.value };
+}
+
+function updateContentProperty(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, contentProperty: target.value };
+}
+
+function updateSourceProperty(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, sourceProperty: target.value };
+}
 </script>

@@ -5,13 +5,13 @@
 
     <!-- 主内容区 -->
     <main class="main-content">
-      <router-view />
+      <router-view @config-saved="handleConfigSaved" />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, provide } from "vue";
 import Sidebar from "./components/Sidebar.vue";
 import {
   loadAllConfigs,
@@ -22,12 +22,24 @@ import {
 // 平台配置状态
 const platformConfigs = ref<AllPlatformConfigs>({ ...defaultConfigs });
 
-onMounted(async () => {
+// 提供给子组件使用
+provide('platformConfigs', platformConfigs);
+
+async function loadConfigs() {
   try {
     platformConfigs.value = await loadAllConfigs();
   } catch (error) {
     console.error('Failed to load configs:', error);
   }
+}
+
+// 处理配置保存事件
+function handleConfigSaved() {
+  loadConfigs();
+}
+
+onMounted(() => {
+  loadConfigs();
 });
 </script>
 

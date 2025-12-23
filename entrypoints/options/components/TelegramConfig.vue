@@ -4,7 +4,8 @@
       <label class="switch-label">
         <input
           type="checkbox"
-          v-model="config.enabled"
+          :checked="config.enabled"
+          @change="updateEnabled"
           class="switch-input"
         />
         <span class="switch-slider"></span>
@@ -16,7 +17,8 @@
       <label>{{ t('options.telegram.botToken') }}</label>
       <input
         type="text"
-        v-model="config.botToken"
+        :value="config.botToken"
+        @input="updateBotToken"
         :placeholder="t('options.telegram.botTokenPlaceholder')"
       />
       <small>
@@ -30,7 +32,8 @@
       <label>{{ t('options.telegram.channelId') }}</label>
       <input
         type="text"
-        v-model="config.channelId"
+        :value="config.channelId"
+        @input="updateChannelId"
         :placeholder="t('options.telegram.channelIdPlaceholder')"
       />
       <small>{{ t('options.telegram.channelIdHint') }}</small>
@@ -48,4 +51,19 @@ const config = defineModel<{
   botToken: string;
   channelId: string;
 }>('config', { required: true });
+
+function updateEnabled(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, enabled: target.checked };
+}
+
+function updateBotToken(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, botToken: target.value };
+}
+
+function updateChannelId(event: Event) {
+  const target = event.target as HTMLInputElement;
+  config.value = { ...config.value, channelId: target.value };
+}
 </script>
