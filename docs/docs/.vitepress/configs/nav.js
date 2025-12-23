@@ -8,5 +8,4 @@ export default [
       { text: 'Firefox Addons', link: 'https://addons.mozilla.org/zh-CN/firefox/addon/clipper-hub/' },
     ]
   },
-   { text: '隐私政策', link: '/PRIVACY_POLICY/en' },
 ]
