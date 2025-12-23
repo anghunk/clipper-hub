@@ -36,13 +36,12 @@ export default defineConfig({
 		version: pkg.version,
 		description:
 			'将网页内容一键收藏至多个平台的浏览器扩展，支持 Telegram、Discord、Notion 等多个平台，让你的灵感和收藏无处不在。',
-		permissions: ['contextMenus', 'storage', 'notifications', 'scripting'],
+		permissions: ['contextMenus', 'storage', 'notifications', 'scripting', 'activeTab'],
 		host_permissions: [
 			'https://api.telegram.org/*',
-			'https://discord.com/*',
-			'https://discordapp.com/*',
+			'https://discord.com/api/webhooks/*',
+			'https://discordapp.com/api/webhooks/*',
 			'https://api.notion.com/*',
-			'<all_urls>',
 		],
 		browser_specific_settings: {
 			gecko: {
