@@ -58,6 +58,13 @@
         </router-link>
       </div>
     </div>
+
+    <!-- 版本信息 -->
+    <div class="version-info">
+      <a :href="repoUrl" target="_blank" class="version-text">
+        v{{ version }}
+      </a>
+    </div>
   </aside>
 </template>
 
@@ -65,7 +72,20 @@
 import { useI18n } from 'vue-i18n';
 import { getAllPlatforms, type AllPlatformConfigs } from '@/lib/platforms';
 
+interface PackageJson {
+  name: string;
+  version: string;
+  repository?: {
+    type: string;
+    url: string;
+  };
+}
+
 const { t } = useI18n();
+
+// 使用 import.meta.env 获取版本信息
+const version = import.meta.env.PACKAGE_VERSION || '0.0.6';
+const repoUrl = 'https://github.com/anghunk/clipper-hub';
 
 defineProps<{
   platformConfigs: AllPlatformConfigs;

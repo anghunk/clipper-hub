@@ -9,7 +9,7 @@
       >
         <option value="auto">🌐 {{ t('options.general.followBrowser') }}</option>
         <option value="zh-CN">🇨🇳 {{ t('options.general.chinese') }}</option>
-        <option value="en-US">🇬🇧 {{ t('options.general.english') }}</option>
+        <option value="en-US">en {{ t('options.general.english') }}</option>
       </select>
     </div>
   </div>

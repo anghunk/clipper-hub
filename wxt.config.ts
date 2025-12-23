@@ -24,6 +24,7 @@ export default defineConfig({
 			'import.meta.env.VITE_NOTION_ENABLED': JSON.stringify(process.env.VITE_NOTION_ENABLED || 'false'),
 			'import.meta.env.VITE_NOTION_INTEGRATION_TOKEN': JSON.stringify(process.env.VITE_NOTION_INTEGRATION_TOKEN || ''),
 			'import.meta.env.VITE_NOTION_DATABASE_ID': JSON.stringify(process.env.VITE_NOTION_DATABASE_ID || ''),
+			'import.meta.env.PACKAGE_VERSION': JSON.stringify(pkg.version),
 
 			// vue-i18n 特性标志
 			__VUE_I18N_FULL_INSTALL__: true,
