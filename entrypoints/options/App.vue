@@ -3,11 +3,11 @@
     <!-- 侧边栏 -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h1>Clipper Hub - 设置</h1>
+        <h1>{{ t('options.title') }}</h1>
       </div>
 
       <div class="sidebar-section">
-        <h3>平台管理</h3>
+        <h3>{{ t('options.platformManagement') }}</h3>
         <div class="platform-list">
           <button
             v-for="platform in platforms"
@@ -22,11 +22,26 @@
               <span
                 v-if="platformConfigs[platform.meta.id].enabled"
                 class="status-badge enabled"
-                title="已启用"
+                :title="t('common.enabled')"
               >
-                ON
+                {{ t('common.on') }}
               </span>
-              <span v-else class="status-badge disabled" title="未启用">OFF</span>
+              <span v-else class="status-badge disabled" :title="t('common.disabled')">{{ t('common.off') }}</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- 语言设置入口 -->
+      <div class="sidebar-section">
+        <h3>{{ t('options.language.title') }}</h3>
+        <div class="platform-list">
+          <button
+            :class="['platform-item', { active: activePlatformTab === 'language' }]"
+            @click="activePlatformTab = 'language'"
+          >
+            <div class="platform-info">
+              <span class="platform-name">🌐 {{ t('options.language.label') }}</span>
             </div>
           </button>
         </div>
@@ -41,7 +56,7 @@
 
         <div class="tutorial-link">
           <a href="https://clipper-hub.netlify.app/" target="_blank">
-            查看完整配置教程
+            {{ t('options.tutorial') }}
           </a>
         </div>
       </div>
@@ -56,32 +71,31 @@
               class="switch-input"
             />
             <span class="switch-slider"></span>
-            <span class="switch-text">启用 Telegram</span>
+            <span class="switch-text">{{ t('options.enableTelegram') }}</span>
           </label>
         </div>
 
         <div class="form-group">
-          <label>Bot Token</label>
+          <label>{{ t('options.telegram.botToken') }}</label>
           <input
             type="text"
             v-model="platformConfigs.telegram.botToken"
-            placeholder="输入 Bot Token"
+            :placeholder="t('options.telegram.botTokenPlaceholder')"
           />
           <small
-            >在
-            <a href="https://t.me/BotFather" target="_blank">@BotFather</a> 申请机器人获取
-            Token</small
+            >{{ t('options.telegram.botTokenHint').replace('@BotFather', '') }}
+            <a href="https://t.me/BotFather" target="_blank">@BotFather</a> {{ t('options.telegram.botTokenHint').includes('获取') ? '获取 Token' : '' }}</small
           >
         </div>
 
         <div class="form-group">
-          <label>Channel ID</label>
+          <label>{{ t('options.telegram.channelId') }}</label>
           <input
             type="text"
             v-model="platformConfigs.telegram.channelId"
-            placeholder="@mychannel 或 -100123456789"
+            :placeholder="t('options.telegram.channelIdPlaceholder')"
           />
-          <small>记得将机器人添加为频道管理员</small>
+          <small>{{ t('options.telegram.channelIdHint') }}</small>
         </div>
       </div>
 
@@ -95,18 +109,18 @@
               class="switch-input"
             />
             <span class="switch-slider"></span>
-            <span class="switch-text">启用 Discord</span>
+            <span class="switch-text">{{ t('options.enableDiscord') }}</span>
           </label>
         </div>
 
         <div class="form-group">
-          <label>Webhook URL</label>
+          <label>{{ t('options.discord.webhookUrl') }}</label>
           <input
             type="text"
             v-model="platformConfigs.discord.webhookUrl"
-            placeholder="https://discord.com/api/webhooks/..."
+            :placeholder="t('options.discord.webhookUrlPlaceholder')"
           />
-          <small>在 Discord 频道设置中创建 Webhook</small>
+          <small>{{ t('options.discord.webhookUrlHint') }}</small>
         </div>
       </div>
 
@@ -120,41 +134,41 @@
               class="switch-input"
             />
             <span class="switch-slider"></span>
-            <span class="switch-text">启用 Notion</span>
+            <span class="switch-text">{{ t('options.enableNotion') }}</span>
           </label>
         </div>
 
         <div class="form-group">
-          <label>Integration Token</label>
+          <label>{{ t('options.notion.integrationToken') }}</label>
           <input
             type="text"
             v-model="platformConfigs.notion.integrationToken"
-            placeholder="secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            :placeholder="t('options.notion.integrationTokenPlaceholder')"
           />
           <small
-            >在
+            >{{ t('options.notion.integrationTokenHint').split('Notion Integrations')[0] }}
             <a href="https://www.notion.so/my-integrations" target="_blank"
               >Notion Integrations</a
             >
-            创建 Integration 获取 Token</small
+            {{ t('options.notion.integrationTokenHint').split('Notion Integrations')[1] || '' }}</small
           >
         </div>
 
         <div class="form-group">
-          <label>Database ID</label>
+          <label>{{ t('options.notion.databaseId') }}</label>
           <input
             type="text"
             v-model="platformConfigs.notion.databaseId"
-            placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+            :placeholder="t('options.notion.databaseIdPlaceholder')"
           />
-          <small>从数据库页面 URL 中提取，并将 Integration 连接到该数据库</small>
+          <small>{{ t('options.notion.databaseIdHint') }}</small>
         </div>
 
         <div class="form-group">
-          <label>高级配置</label>
+          <label>{{ t('options.notion.advancedConfig') }}</label>
           <details style="margin-top: 8px">
             <summary style="cursor: pointer; color: #666; font-size: 13px">
-              属性名称映射
+              {{ t('options.notion.propertyMapping') }}
             </summary>
             <div
               style="
@@ -165,50 +179,87 @@
               "
             >
               <div style="margin-bottom: 12px">
-                <label style="font-size: 12px; color: #666">标题字段名称</label>
+                <label style="font-size: 12px; color: #666">{{ t('options.notion.titleProperty') }}</label>
                 <input
                   type="text"
                   v-model="platformConfigs.notion.titleProperty"
-                  placeholder="标题"
+                  :placeholder="t('options.notion.titlePropertyPlaceholder')"
                   style="margin-top: 4px"
                 />
               </div>
               <div style="margin-bottom: 12px">
-                <label style="font-size: 12px; color: #666">内容字段名称</label>
+                <label style="font-size: 12px; color: #666">{{ t('options.notion.contentProperty') }}</label>
                 <input
                   type="text"
                   v-model="platformConfigs.notion.contentProperty"
-                  placeholder="内容"
+                  :placeholder="t('options.notion.contentPropertyPlaceholder')"
                   style="margin-top: 4px"
                 />
               </div>
               <div>
-                <label style="font-size: 12px; color: #666">来源字段名称</label>
+                <label style="font-size: 12px; color: #666">{{ t('options.notion.sourceProperty') }}</label>
                 <input
                   type="text"
                   v-model="platformConfigs.notion.sourceProperty"
-                  placeholder="来源"
+                  :placeholder="t('options.notion.sourcePropertyPlaceholder')"
                   style="margin-top: 4px"
                 />
               </div>
             </div>
           </details>
           <small style="display: block; margin-top: 8px">
-            📚 没有数据库？<a
+            📚 {{ t('options.notion.templateHint') }}<a
               href="https://anghunk.notion.site/2cad17511b968031a7ebeecd5e279c6a"
               target="_blank"
-              >复制该副本模板</a
+              >{{ t('options.notion.templateLink') }}</a
             >
           </small>
         </div>
       </div>
 
+      <!-- 语言设置 -->
+      <div v-if="activePlatformTab === 'language'" class="config-form">
+        <div class="form-group">
+          <label>{{ t('options.language.label') }}</label>
+          <div class="language-options">
+            <label class="language-option" :class="{ active: currentLocale === null }">
+              <input
+                type="radio"
+                name="language"
+                :checked="currentLocale === null"
+                @change="changeLanguage(null)"
+              />
+              <span>🌐 {{ t('options.language.followBrowser') }}</span>
+            </label>
+            <label class="language-option" :class="{ active: currentLocale === 'zh-CN' }">
+              <input
+                type="radio"
+                name="language"
+                :checked="currentLocale === 'zh-CN'"
+                @change="changeLanguage('zh-CN')"
+              />
+              <span>🇨🇳 {{ t('options.language.chinese') }}</span>
+            </label>
+            <label class="language-option" :class="{ active: currentLocale === 'en-US' }">
+              <input
+                type="radio"
+                name="language"
+                :checked="currentLocale === 'en-US'"
+                @change="changeLanguage('en-US')"
+              />
+              <span>🇬🇧 {{ t('options.language.english') }}</span>
+            </label>
+          </div>
+          <small>{{ t('options.language.currentLanguage') }}: {{ currentLanguageLabel }}</small>
+        </div>
+      </div>
+
       <!-- 操作按钮 -->
-      <div class="action-bar">
+      <div v-if="activePlatformTab !== 'language'" class="action-bar">
         <button @click="testConnection" :disabled="isLoading" class="btn btn-secondary">
-          {{ isLoading ? "测试中..." : "测试连接" }}
+          {{ isLoading ? t('common.testing') : t('common.test') }}
         </button>
-        <button @click="saveSettings" class="btn btn-primary">保存设置</button>
+        <button @click="saveSettings" class="btn btn-primary">{{ t('options.saveSettings') }}</button>
       </div>
 
       <!-- 状态消息 -->
@@ -221,6 +272,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { browser } from "wxt/browser";
 import {
   loadAllConfigs,
@@ -231,15 +283,20 @@ import {
   type PlatformType,
   defaultConfigs,
 } from "@/lib/platforms";
+import { switchLocale, clearLocale, getBrowserLocale, type Locale } from "@/lib/i18n";
 
+const { t, locale } = useI18n();
 const browserAPI = browser;
 
 // 状态
-const activePlatformTab = ref<PlatformType>("telegram");
+const activePlatformTab = ref<PlatformType | 'language'>('telegram');
 const platformConfigs = ref<AllPlatformConfigs>({ ...defaultConfigs });
 const isLoading = ref(false);
 const statusMessage = ref("");
 const statusType = ref("info");
+
+// 语言设置
+const currentLocale = ref<Locale | null>(null);
 
 // 获取所有平台
 const platforms = getAllPlatforms();
@@ -249,6 +306,16 @@ const currentPlatform = computed(() =>
   platforms.find(p => p.meta.id === activePlatformTab.value)
 );
 
+// 当前语言显示标签
+const currentLanguageLabel = computed(() => {
+  const actualLocale = locale.value as Locale;
+  if (currentLocale.value === null) {
+    const langName = actualLocale === 'zh-CN' ? t('options.language.chinese') : t('options.language.english');
+    return `${t('options.language.followBrowser')} (${langName})`;
+  }
+  return currentLocale.value === 'zh-CN' ? t('options.language.chinese') : t('options.language.english');
+});
+
 // 监听平台切换，清除状态消息
 watch(activePlatformTab, () => {
   statusMessage.value = "";
@@ -257,35 +324,66 @@ watch(activePlatformTab, () => {
 
 onMounted(() => {
   restoreSettings();
+  loadLanguageSettings();
 });
 
 async function restoreSettings() {
   try {
     platformConfigs.value = await loadAllConfigs();
   } catch (error) {
-    console.error("加载配置失败:", error);
-    showStatus("❌ 加载配置失败", "error");
+    console.error(t('options.loadFailed'), error);
+    showStatus(`❌ ${t('options.loadFailed')}`, "error");
   }
+}
+
+// 加载语言设置
+async function loadLanguageSettings() {
+  try {
+    const result = await browserAPI.storage.local.get('locale');
+    if (result.locale) {
+      currentLocale.value = result.locale as Locale;
+    } else {
+      currentLocale.value = null;
+    }
+  } catch (error) {
+    console.error('Failed to load language settings:', error);
+  }
+}
+
+// 切换语言
+async function changeLanguage(newLocale: Locale | null) {
+  currentLocale.value = newLocale;
+  
+  if (newLocale === null) {
+    await clearLocale();
+  } else {
+    await switchLocale(newLocale);
+  }
+  
+  showStatus(`✅ ${t('options.saveSuccess')}`, "success");
+  setTimeout(() => {
+    statusMessage.value = "";
+  }, 2000);
 }
 
 // 测试连接
 async function testConnection() {
-  const platformType = activePlatformTab.value;
+  const platformType = activePlatformTab.value as PlatformType;
   const config = platformConfigs.value[platformType];
 
   isLoading.value = true;
-  showStatus("正在测试连接...", "info");
+  showStatus(t('options.testing'), "info");
 
   try {
     const result = await testPlatformConnection(platformType, config);
 
     if (result.success) {
-      showStatus(`✅ 连接成功！测试消息已发送`, "success");
+      showStatus(`✅ ${t('options.testSuccess')}`, "success");
     } else {
-      showStatus(`❌ 连接失败: ${result.error || "未知错误"}`, "error");
+      showStatus(`❌ ${t('options.testFailed')}: ${result.error || t('common.error')}`, "error");
     }
   } catch (error: any) {
-    showStatus(`❌ 网络错误: ${error.message}`, "error");
+    showStatus(`❌ ${t('options.networkError')}: ${error.message}`, "error");
   } finally {
     isLoading.value = false;
   }
@@ -295,12 +393,12 @@ async function testConnection() {
 async function saveSettings() {
   try {
     await saveAllConfigs(platformConfigs.value);
-    showStatus("✅ 设置已保存!", "success");
+    showStatus(`✅ ${t('options.saveSuccess')}`, "success");
     setTimeout(() => {
       statusMessage.value = "";
     }, 3000);
   } catch (error: any) {
-    showStatus(`❌ 保存失败: ${error.message}`, "error");
+    showStatus(`❌ ${t('options.saveFailed')}: ${error.message}`, "error");
   }
 }
 

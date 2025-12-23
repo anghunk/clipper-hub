@@ -12,6 +12,7 @@ export default defineConfig({
 		resolve: {
 			alias: {
 				'@': resolve(__dirname, '.'),
+				'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
 			},
 		},
 		define: {
@@ -24,6 +25,12 @@ export default defineConfig({
 			'import.meta.env.VITE_NOTION_ENABLED': JSON.stringify(process.env.VITE_NOTION_ENABLED || 'false'),
 			'import.meta.env.VITE_NOTION_INTEGRATION_TOKEN': JSON.stringify(process.env.VITE_NOTION_INTEGRATION_TOKEN || ''),
 			'import.meta.env.VITE_NOTION_DATABASE_ID': JSON.stringify(process.env.VITE_NOTION_DATABASE_ID || ''),
+
+			// vue-i18n 特性标志
+			__VUE_I18N_FULL_INSTALL__: true,
+			__VUE_I18N_LEGACY_API__: false,
+			__INTLIFY_PROD_DEVTOOLS__: false,
+			__INTLIFY_JIT_COMPILATION__: true,
 		},
 		esbuild: {
 			// 生产环境移除 console 和 debugger

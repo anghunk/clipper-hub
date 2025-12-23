@@ -2,11 +2,11 @@
   <div class="popup-container">
     <!-- 顶部标题栏 -->
     <div class="header">
-      <h1>Clipper Hub - 万能剪藏</h1>
+      <h1>{{ t('popup.title') }}</h1>
       <button
         @click="openSettings"
         class="settings-btn"
-        title="打开设置"
+        :title="t('common.settings')"
       >
         <svg viewBox="0 0 24 24" width="20" height="20">
           <path
@@ -22,15 +22,15 @@
       <!-- 连接状态 -->
       <div class="status-bar" :class="{ configured: isConfigured }">
         <span class="status-icon">{{ isConfigured ? "✅" : "⚠️" }}</span>
-        <span class="status-text">{{ isConfigured ? "已连接" : "未配置" }}</span>
+        <span class="status-text">{{ isConfigured ? t('popup.connected') : t('popup.notConfigured') }}</span>
       </div>
 
       <!-- 快捷输入区 -->
       <div class="input-section">
-        <label>快速发送</label>
+        <label>{{ t('popup.quickSend') }}</label>
         <textarea
           v-model="quickMessage"
-          placeholder="输入要发送的内容..."
+          :placeholder="t('popup.inputPlaceholder')"
           rows="6"
           @keydown.ctrl.enter="sendQuickMessage"
         ></textarea>
@@ -44,10 +44,10 @@
               @click="toggleDropdown"
               :class="{ active: isDropdownOpen }"
             >
-              <span class="trigger-label">发送到:</span>
+              <span class="trigger-label">{{ t('common.sendTo') }}</span>
               <span class="trigger-value">
-                {{ selectedPlatforms.length === 0 ? '请选择平台' : 
-                   selectedPlatforms.length === availablePlatforms.length ? '全部平台' :
+                {{ selectedPlatforms.length === 0 ? t('common.selectPlatform') : 
+                   selectedPlatforms.length === availablePlatforms.length ? t('common.allPlatforms') :
                    getSelectedPlatformNames() }}
               </span>
               <svg class="dropdown-arrow" :class="{ open: isDropdownOpen }" viewBox="0 0 24 24" width="16" height="16">
@@ -57,7 +57,7 @@
             <div v-show="isDropdownOpen" class="dropdown-menu">
               <div class="dropdown-header">
                 <button @click="toggleAll" class="toggle-all-btn" type="button">
-                  {{ selectedPlatforms.length === availablePlatforms.length ? '取消全选' : '全选' }}
+                  {{ selectedPlatforms.length === availablePlatforms.length ? t('common.deselectAll') : t('common.selectAll') }}
                 </button>
               </div>
               <div class="dropdown-options">
@@ -92,7 +92,7 @@
               <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
             </svg>
             <span v-if="isSending" class="spinner"></span>
-            {{ isSending ? '发送中...' : '发送' }} <span v-if="!isSending" class="hint">(Ctrl + Enter 快捷发送)</span>
+            {{ isSending ? t('common.sending') : t('common.send') }} <span v-if="!isSending" class="hint">{{ t('popup.sendHint') }}</span>
           </button>
         </div>
       </div>
@@ -100,7 +100,7 @@
       <!-- 快捷操作 -->
       <div class="quick-actions">
         <button @click="sendCurrentPage" class="action-btn" :disabled="!isConfigured">
-          收藏当前页面
+          {{ t('popup.clipCurrentPage') }}
         </button>
       </div>
 
@@ -114,9 +114,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { browser } from "wxt/browser";
 import { hasAnyConfigured, loadAllConfigs, getAllPlatforms, type PlatformType } from "@/lib/platforms";
 
+const { t } = useI18n();
 const browserAPI = browser;
 
 // 主面板状态
@@ -215,18 +217,18 @@ async function restoreSettings() {
 // 快速发送消息
 async function sendQuickMessage() {
   if (!quickMessage.value.trim()) {
-    showStatus("请输入内容", "error");
+    showStatus(t('popup.inputRequired'), "error");
     return;
   }
 
   if (!isConfigured.value) {
-    showStatus("请先配置平台", "error");
+    showStatus(t('popup.configRequired'), "error");
     openSettings();
     return;
   }
 
   if (selectedPlatforms.value.length === 0) {
-    showStatus("请至少选择一个平台", "error");
+    showStatus(t('popup.selectPlatformRequired'), "error");
     return;
   }
 
@@ -278,16 +280,16 @@ async function sendQuickMessage() {
     const totalCount = Object.keys(allResults).length;
     
     if (successCount > 0) {
-      showStatus(`✅ 发送成功 (${successCount}/${totalCount} 个平台)`, "success");
+      showStatus(`✅ ${t('popup.sendSuccess')} (${successCount}/${totalCount} ${t('popup.platformsSuccess')})`, "success");
       quickMessage.value = "";
       setTimeout(() => {
         statusMessage.value = "";
       }, 3000);
     } else {
-      showStatus("❌ 所有平台发送失败", "error");
+      showStatus(`❌ ${t('popup.sendFailed')}`, "error");
     }
   } catch (error: any) {
-    showStatus(`❌ 错误: ${error.message}`, "error");
+    showStatus(`❌ ${t('common.error')}: ${error.message}`, "error");
   } finally {
     isSending.value = false;
   }
@@ -319,10 +321,10 @@ async function sendCurrentPage() {
       // 关闭 popup
       window.close();
     } else {
-      showStatus("无法获取当前页面信息", "error");
+      showStatus(t('popup.noPageInfo'), "error");
     }
   } catch (error: any) {
-    showStatus(`❌ 错误: ${error.message}`, "error");
+    showStatus(`❌ ${t('common.error')}: ${error.message}`, "error");
   }
 }
 

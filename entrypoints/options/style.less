@@ -546,3 +546,47 @@
     font-size: 13px;
   }
 }
+
+/* 语言选项样式 */
+.language-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #ffffff;
+}
+
+.language-option:hover {
+  border-color: #1976d2;
+  background: #f0f7ff;
+}
+
+.language-option.active {
+  border-color: #1976d2;
+  background: #e3f2fd;
+}
+
+.language-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  accent-color: #1976d2;
+}
+
+.language-option span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+}

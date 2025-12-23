@@ -2,29 +2,29 @@
   <div class="edit-container">
     <!-- 顶部标题栏 -->
     <div class="header">
-      <h1>编辑剪藏内容</h1>
+      <h1>{{ t('edit.title') }}</h1>
     </div>
 
     <div class="content">
       <div class="form-group">
-        <label for="titleInput">自定义标题</label>
+        <label for="titleInput">{{ t('edit.customTitle') }}</label>
         <input
           type="text"
           id="titleInput"
           v-model="titleInput"
-          placeholder="默认抓取网站 title 标题"
+          :placeholder="t('edit.titlePlaceholder')"
           maxlength="200"
           @keypress.enter="handleSave"
         />
       </div>
 
       <div class="form-group content-group">
-        <label>内容编辑</label>
+        <label>{{ t('edit.contentEdit') }}</label>
         <div class="content-textarea">
           <textarea id="contentInput" class="" v-model="contentText"></textarea>
           <!-- 来源信息单独显示 -->
           <div v-if="includeSource && editData?.url" class="source-info">
-            <span class="source-label">来源:</span>
+            <span class="source-label">{{ t('edit.source') }}:</span>
             <a :href="editData.url" target="_blank" class="source-link">{{
               editData.url
             }}</a>
@@ -42,10 +42,10 @@
           @click="toggleDropdown"
           :class="{ active: isDropdownOpen }"
         >
-          <span class="trigger-label">发送到:</span>
+          <span class="trigger-label">{{ t('common.sendTo') }}</span>
           <span class="trigger-value">
-            {{ selectedPlatforms.length === 0 ? '请选择平台' : 
-               selectedPlatforms.length === availablePlatforms.length ? '全部平台' :
+            {{ selectedPlatforms.length === 0 ? t('common.selectPlatform') : 
+               selectedPlatforms.length === availablePlatforms.length ? t('common.allPlatforms') :
                getSelectedPlatformNames() }}
           </span>
           <svg class="dropdown-arrow" :class="{ open: isDropdownOpen }" viewBox="0 0 24 24" width="16" height="16">
@@ -55,7 +55,7 @@
         <div v-show="isDropdownOpen" class="dropdown-menu">
           <div class="dropdown-header">
             <button @click="toggleAll" class="toggle-all-btn" type="button">
-              {{ selectedPlatforms.length === availablePlatforms.length ? '取消全选' : '全选' }}
+              {{ selectedPlatforms.length === availablePlatforms.length ? t('common.deselectAll') : t('common.selectAll') }}
             </button>
           </div>
           <div class="dropdown-options">
@@ -81,7 +81,7 @@
     </div>
 
     <div class="button-group">
-      <button @click="handleCancel" class="btn btn-secondary">取消</button>
+      <button @click="handleCancel" class="btn btn-secondary">{{ t('common.cancel') }}</button>
       <button
         @click="handleSave"
         :disabled="isSending || selectedPlatforms.length === 0"
@@ -91,7 +91,7 @@
           <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
         </svg>
         <span v-if="isSending" class="spinner"></span>
-        {{ isSending ? "发送中..." : "发送" }}
+        {{ isSending ? t('common.sending') : t('common.send') }}
       </button>
     </div>
   </div>
@@ -99,10 +99,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { useI18n } from "vue-i18n";
 import { browser } from "wxt/browser";
 import { ElMessage } from 'element-plus';
 import { loadAllConfigs, getAllPlatforms, type PlatformType } from "@/lib/platforms";
 
+const { t } = useI18n();
 const browserAPI = browser;
 
 const titleInput = ref("");
@@ -256,12 +258,12 @@ function loadContentText() {
 
 async function handleSave() {
   if (!editData.value) {
-    ElMessage.error('数据丢失，请重试');
+    ElMessage.error(t('edit.dataLost'));
     return;
   }
 
   if (selectedPlatforms.value.length === 0) {
-    ElMessage.error('请至少选择一个平台');
+    ElMessage.error(t('edit.selectPlatformRequired'));
     return;
   }
 
@@ -298,7 +300,7 @@ async function handleSave() {
   
   // 检查是否至少有内容
   if (parts.length === 0) {
-    ElMessage.error('内容不能为空');
+    ElMessage.error(t('edit.contentRequired'));
     return;
   }
   
@@ -328,14 +330,14 @@ async function handleSave() {
         if (failedPlatforms.length === 0) {
           // 全部成功
           ElMessage.success({
-            message: `发送成功！已发送到: ${successPlatforms.join(', ')}`,
+            message: `${t('edit.sendSuccess')}: ${successPlatforms.join(', ')}`,
             duration: 2000,
             onClose: () => window.close()
           });
         } else {
           // 部分成功
           ElMessage.warning({
-            message: `部分发送成功\n成功: ${successPlatforms.join(', ')}\n失败: ${failedPlatforms.join(', ')}`,
+            message: `${t('edit.sendPartialSuccess')}\n${t('edit.successLabel')}: ${successPlatforms.join(', ')}\n${t('edit.failedLabel')}: ${failedPlatforms.join(', ')}`,
             duration: 3000,
             onClose: () => window.close()
           });
@@ -343,14 +345,14 @@ async function handleSave() {
       } else {
         // 全部失败
         const errors = failedPlatforms.join('\n');
-        ElMessage.error(`发送失败\n${errors || '未知错误'}`);
+        ElMessage.error(`${t('edit.sendAllFailed')}\n${errors || t('common.error')}`);
       }
     } else {
-      ElMessage.error('发送失败，请检查平台配置');
+      ElMessage.error(t('edit.sendRetry'));
     }
   } catch (error) {
-    console.error("发送失败:", error);
-    ElMessage.error('发送失败，请重试');
+    console.error(t('edit.sendAllFailed'), error);
+    ElMessage.error(t('edit.sendRetry'));
   } finally {
     isSending.value = false;
   }

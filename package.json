@@ -21,10 +21,12 @@
     "publish": "^0.6.0",
     "rimraf": "^6.1.2",
     "vue": "^3.5.12",
+    "vue-i18n": "^9.14.5",
     "webext-dynamic-content-scripts": "^10.0.3",
     "webext-permission-toggle": "^5.0.1"
   },
   "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^11.0.3",
     "@types/chrome": "^0.0.280",
     "@vitejs/plugin-vue": "^5.1.2",
     "@wxt-dev/module-vue": "^1.0.1",
