@@ -37,6 +37,17 @@
     "platformsSuccess": "个平台",
     "noPageInfo": "无法获取当前页面信息"
   },
+  "platforms": {
+    "telegram": {
+      "description": "通过 Bot API 发送消息到 Telegram 频道或群组"
+    },
+    "discord": {
+      "description": "通过 Webhook 发送消息到 Discord 频道"
+    },
+    "notion": {
+      "description": "将内容保存到 Notion 数据库"
+    }
+  },
   "options": {
     "title": "Clipper Hub - 设置",
     "platformManagement": "平台管理",

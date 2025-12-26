@@ -37,6 +37,17 @@
     "platformsSuccess": "platforms",
     "noPageInfo": "Unable to get current page information"
   },
+  "platforms": {
+    "telegram": {
+      "description": "Send messages to Telegram channels or groups via Bot API"
+    },
+    "discord": {
+      "description": "Send messages to Discord channels via Webhook"
+    },
+    "notion": {
+      "description": "Save content to Notion database"
+    }
+  },
   "options": {
     "title": "Clipper Hub - Settings",
     "platformManagement": "Platform Management",

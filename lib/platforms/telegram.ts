@@ -8,7 +8,7 @@ export class TelegramPlatform implements Platform {
 		id: 'telegram',
 		name: 'Telegram',
 		icon: '📨',
-		description: '通过 Bot API 发送消息到 Telegram 频道或群组',
+		description: 'platforms.telegram.description',
 	};
 
 	validateConfig(config: PlatformConfig): boolean {

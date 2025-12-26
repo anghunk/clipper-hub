@@ -2,7 +2,7 @@
   <div>
     <div class="content-header">
       <h2>{{ platform?.meta.name }}</h2>
-      <p class="description">{{ platform?.meta.description }}</p>
+      <p class="description">{{ t(platform?.meta.description || '') }}</p>
 
       <div class="tutorial-link">
         <a href="https://clipper-hub.netlify.app/" target="_blank">

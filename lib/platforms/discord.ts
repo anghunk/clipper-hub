@@ -9,7 +9,7 @@ export class DiscordPlatform implements Platform {
 		id: 'discord',
 		name: 'Discord',
 		icon: '💬',
-		description: '通过 Webhook 发送消息到 Discord 频道',
+		description: 'platforms.discord.description',
 	};
 
 	validateConfig(config: PlatformConfig): boolean {

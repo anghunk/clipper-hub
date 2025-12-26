@@ -9,7 +9,7 @@ export class NotionPlatform implements Platform {
     id: 'notion',
     name: 'Notion',
     icon: '📝',
-    description: '将内容保存到 Notion 数据库',
+    description: 'platforms.notion.description',
   };
 
   validateConfig(config: PlatformConfig): boolean {
